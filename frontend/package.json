@@ -1,0 +1,41 @@
+{
+  "name": "event-chatbot-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^1.6.2",
+    "leaflet": "^1.9.4",
+    "leaflet.heat": "^0.2.0",
+    "leaflet.markercluster": "^1.5.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
+    "react-router-dom": "^7.12.0",
+    "react-scripts": "5.0.1",
+    "styled-components": "^6.1.1"
+  },
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "homepage": "."
+}

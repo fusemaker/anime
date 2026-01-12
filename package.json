@@ -1,0 +1,41 @@
+{
+  "name": "event-management-chatbot",
+  "version": "1.0.0",
+  "description": "Enterprise-grade Event Management Chatbot with secure authentication",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --max-http-header-size=16384 src/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node --max-http-header-size=16384 src/server.js",
+    "client": "cd frontend && npm start",
+    "frontend": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "view-db": "node src/utils/viewDatabase.js"
+  },
+  "keywords": [
+    "chatbot",
+    "event-management",
+    "ai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "all": "^0.0.0",
+    "axios": "^1.6.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.12"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.0.2"
+  }
+}
