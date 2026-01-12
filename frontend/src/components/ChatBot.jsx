@@ -417,11 +417,12 @@ const ChatBot = ({ token, user, onLogout }) => {
             const response = await api.get('/api/events', {
               params: { search: titleMatch[1].trim(), limit: 1 }
             });
-            if (response.data.events && response.data.events.length > 0) {
+            if (response.data?.success && response.data.events && response.data.events.length > 0) {
               eventData = response.data.events[0];
             }
           } catch (err) {
             console.error('Error finding event:', err);
+            // Don't throw - let the function continue to show error message
           }
         }
       }
@@ -466,11 +467,12 @@ const ChatBot = ({ token, user, onLogout }) => {
             const response = await api.get('/api/events', {
               params: { search: titleMatch[1].trim(), limit: 1 }
             });
-            if (response.data.events && response.data.events.length > 0) {
+            if (response.data?.success && response.data.events && response.data.events.length > 0) {
               eventData = response.data.events[0];
             }
           } catch (err) {
             console.error('Error finding event:', err);
+            // Don't throw - let the function continue to show error message
           }
         }
       }
@@ -629,8 +631,17 @@ const ChatBot = ({ token, user, onLogout }) => {
     } catch (error) {
       // Error handling logic
       let errorMessage = 'An error occurred. Please try again.';
-      if (error.response?.data?.error) {
+      
+      if (error.response?.status === 401) {
+        errorMessage = 'Authentication required. Please log in again.';
+        // Clear token and reload
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setTimeout(() => window.location.reload(), 2000);
+      } else if (error.response?.data?.error) {
         errorMessage = error.response.data.error;
+      } else if (error.code === 'ERR_NETWORK' || error.message?.includes('Network Error') || error.message?.includes('ERR_CONNECTION')) {
+        errorMessage = 'Network error. Please check your connection and ensure the server is running.';
       } else if (error.message) {
         errorMessage = error.message;
       }

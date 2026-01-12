@@ -263,6 +263,16 @@ const InteractiveMap = ({ user }) => {
             setEvents(validEvents);
         } catch (error) {
             console.error("Fetch error", error);
+            // Set empty array on error to prevent crashes
+            setEvents([]);
+            // Show user-friendly error message
+            if (error.response?.status === 401) {
+                console.error("Authentication required");
+            } else if (error.response?.status >= 500) {
+                console.error("Server error. Please try again later.");
+            } else if (error.code === 'ERR_NETWORK' || error.message?.includes('Network Error')) {
+                console.error("Network error. Please check your connection.");
+            }
         } finally {
             setLoading(false);
         }

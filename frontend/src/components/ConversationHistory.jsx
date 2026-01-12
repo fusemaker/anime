@@ -30,11 +30,24 @@ const ConversationHistory = ({ isOpen, onClose, onSelectConversation, currentSes
     setLoading(true);
     try {
       const response = await api.get('/api/chat/history');
-      if (response.data.success) {
+      if (response.data?.success) {
         setConversations(response.data.conversations || []);
+      } else {
+        console.warn('API returned success: false', response.data);
+        setConversations([]);
       }
     } catch (error) {
       console.error('Error fetching conversations:', error);
+      // Set empty array on error to prevent crashes
+      setConversations([]);
+      // Show user-friendly error message
+      if (error.response?.status === 401) {
+        console.error("Authentication required. Please log in again.");
+      } else if (error.response?.status >= 500) {
+        console.error("Server error. Please try again later.");
+      } else if (error.code === 'ERR_NETWORK' || error.message?.includes('Network Error')) {
+        console.error("Network error. Please check your connection.");
+      }
     } finally {
       setLoading(false);
     }
@@ -45,15 +58,19 @@ const ConversationHistory = ({ isOpen, onClose, onSelectConversation, currentSes
     if (window.confirm('Are you sure you want to delete this conversation?')) {
       try {
         const response = await api.delete(`/api/chat/history/${sessionId}`);
-        if (response.data.success) {
+        if (response.data?.success) {
           setConversations(conversations.filter(c => c.sessionId !== sessionId));
           if (sessionId === currentSessionId) {
             onNewChat();
           }
+        } else {
+          alert(response.data?.error || 'Failed to delete conversation');
         }
       } catch (error) {
         console.error('Error deleting conversation:', error);
-        alert('Failed to delete conversation');
+        const errorMessage = error.response?.data?.error || 
+                           (error.code === 'ERR_NETWORK' ? 'Network error. Please check your connection.' : 'Failed to delete conversation');
+        alert(errorMessage);
       }
     }
   };

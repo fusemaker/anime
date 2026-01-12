@@ -83,9 +83,23 @@ const EventSidebar = ({
         }
 
         setEvents(fetchedEvents);
+      } else {
+        // Handle case where success is false
+        console.warn('API returned success: false', response.data);
+        setEvents([]);
       }
     } catch (error) {
       console.error('Error fetching events:', error);
+      // Set empty array on error to prevent crashes
+      setEvents([]);
+      // Show user-friendly error message
+      if (error.response?.status === 401) {
+        console.error("Authentication required. Please log in again.");
+      } else if (error.response?.status >= 500) {
+        console.error("Server error. Please try again later.");
+      } else if (error.code === 'ERR_NETWORK' || error.message?.includes('Network Error')) {
+        console.error("Network error. Please check your connection.");
+      }
     } finally {
       setLoading(false);
     }
@@ -592,7 +606,7 @@ const SidebarFooter = styled.div`
   right: 0;
   padding: 1rem;
   background: linear-gradient(to top, rgba(10, 10, 15, 1) 20%, transparent);
-  pointer-events: none; 
+  pointer-events: none;
   display: flex;
   justify-content: center;
   z-index: 100;
