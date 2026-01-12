@@ -285,11 +285,11 @@ const StyledSidebar = styled.div`
   min-width: ${props => props.$collapsed ? '60px' : '280px'};
   max-width: ${props => props.$collapsed ? '60px' : '280px'};
   height: 100vh;
-  background: rgba(10, 15, 28, 0.98);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  color: #e8eaed;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #e5e5e5;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -298,7 +298,7 @@ const StyledSidebar = styled.div`
   left: 0;
   top: 0;
   z-index: 1000;
-  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
 
   @media (max-width: 1024px) {
     width: ${props => props.$collapsed ? '60px' : '280px'};
@@ -324,23 +324,23 @@ const SidebarContent = styled.div`
 `;
 
 const SidebarHeader = styled.div`
-  padding: 1.5rem 1.25rem 1.25rem 1.25rem;
+  padding: 1.5rem 1.25rem 1rem 1.25rem;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 `;
 
 const SectionTitle = styled.h2`
   margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #fff, #a5a5a5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: flex;
   align-items: center;
-  opacity: 0.95;
 `;
 
 const SearchSection = styled.div`
@@ -350,25 +350,24 @@ const SearchSection = styled.div`
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
   color: #fff;
-  font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
   box-sizing: border-box;
 
   &:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(0, 242, 234, 0.4);
-    box-shadow: 0 0 0 3px rgba(0, 242, 234, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 242, 234, 0.3);
+    box-shadow: 0 0 0 2px rgba(0, 242, 234, 0.1);
   }
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.3);
   }
 `;
 
@@ -388,27 +387,20 @@ const FilterTabs = styled.div`
 `;
 
 const FilterTab = styled.button`
-  padding: 0.5rem 0.875rem;
-  background: ${props => props.$active ? 'rgba(0, 242, 234, 0.12)' : 'transparent'};
+  padding: 0.4rem 0.8rem;
+  background: ${props => props.$active ? 'rgba(0, 242, 234, 0.1)' : 'transparent'};
   color: ${props => props.$active ? '#00f2ea' : 'rgba(255, 255, 255, 0.6)'};
-  border: 1px solid ${props => props.$active ? 'rgba(0, 242, 234, 0.3)' : 'rgba(255, 255, 255, 0.15)'};
-  border-radius: 18px;
+  border: 1px solid ${props => props.$active ? 'rgba(0, 242, 234, 0.2)' : 'rgba(255, 255, 255, 0.1)'};
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   white-space: nowrap;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
 
   &:hover {
-    background: ${props => props.$active ? 'rgba(0, 242, 234, 0.18)' : 'rgba(255, 255, 255, 0.08)'};
+    background: ${props => props.$active ? 'rgba(0, 242, 234, 0.15)' : 'rgba(255, 255, 255, 0.05)'};
     color: ${props => props.$active ? '#00f2ea' : '#fff'};
-    border-color: ${props => props.$active ? 'rgba(0, 242, 234, 0.4)' : 'rgba(255, 255, 255, 0.2)'};
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 `;
 
@@ -458,44 +450,42 @@ const EventActionsOverlay = styled.div`
 
 const EventItem = styled.div`
   position: relative;
-  margin-bottom: 0.625rem;
-  padding: 0.875rem 1rem;
-  background: ${props => props.$selected
-    ? 'rgba(0, 242, 234, 0.1)'
-    : 'rgba(255, 255, 255, 0.03)'};
-  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  background: ${props => props.$selected 
+    ? 'rgba(0, 242, 234, 0.12)' 
+    : 'rgba(15, 15, 20, 0.8)'};
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 0.875rem;
-  border: 1px solid ${props => props.$selected
-    ? 'rgba(0, 242, 234, 0.3)'
+  gap: 1rem;
+  border: 1px solid ${props => props.$selected 
+    ? 'rgba(0, 242, 234, 0.3)' 
     : 'rgba(255, 255, 255, 0.08)'};
-  box-shadow: ${props => props.$selected
-    ? '0 2px 12px rgba(0, 242, 234, 0.12)'
-    : '0 1px 3px rgba(0, 0, 0, 0.2)'};
+  box-shadow: ${props => props.$selected 
+    ? '0 2px 8px rgba(0, 242, 234, 0.15)' 
+    : '0 2px 4px rgba(0, 0, 0, 0.3)'};
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   &:hover {
-    background: ${props => props.$selected
-      ? 'rgba(0, 242, 234, 0.15)'
-      : 'rgba(255, 255, 255, 0.06)'};
-    border-color: ${props => props.$selected
-      ? 'rgba(0, 242, 234, 0.4)'
-      : 'rgba(255, 255, 255, 0.15)'};
-    box-shadow: ${props => props.$selected
-      ? '0 4px 16px rgba(0, 242, 234, 0.18)'
-      : '0 4px 12px rgba(0, 0, 0, 0.3)'};
-    transform: translateY(-2px);
-
+    background: ${props => props.$selected 
+      ? 'rgba(0, 242, 234, 0.18)' 
+      : 'rgba(255, 255, 255, 0.08)'};
+    border-color: ${props => props.$selected 
+      ? 'rgba(0, 242, 234, 0.4)' 
+      : 'rgba(255, 255, 255, 0.12)'};
+    box-shadow: ${props => props.$selected 
+      ? '0 4px 12px rgba(0, 242, 234, 0.2)' 
+      : '0 4px 8px rgba(0, 0, 0, 0.4)'};
+    transform: translateY(-1px);
+    
     ${EventActionsOverlay} {
       opacity: 1;
       transform: translateX(0);
     }
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 
   ${props => props.$selected && `
@@ -503,12 +493,12 @@ const EventItem = styled.div`
       content: '';
       position: absolute;
       left: 0;
-      top: 15%;
-      bottom: 15%;
+      top: 10%;
+      bottom: 10%;
       width: 3px;
-      background: linear-gradient(180deg, #00f2ea 0%, #1affee 100%);
-      border-radius: 0 2px 2px 0;
-      box-shadow: 0 0 10px rgba(0, 242, 234, 0.5);
+      background: #00f2ea;
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 0 8px rgba(0, 242, 234, 0.6);
     }
   `}
 `;
@@ -528,32 +518,31 @@ const EventContent = styled.div`
 `;
 
 const EventTitle = styled.div`
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 1.5rem;
-  line-height: 1.5;
-  letter-spacing: -0.01em;
+  line-height: 1.4;
 `;
 
 const EventLocation = styled.div`
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
   display: flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: 0.4rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 0.375rem;
+  margin-top: 0.25rem;
   font-weight: 400;
 
-  span {
-    filter: brightness(1.1);
-    font-size: 0.75rem;
+  span { 
+    filter: grayscale(0.3) brightness(1.1);
+    font-size: 0.8rem;
   }
 `;
 
@@ -599,32 +588,29 @@ const SidebarFooter = styled.div`
 `;
 
 const FooterButton = styled.button`
-  pointer-events: auto;
+  pointer-events: auto; 
   width: 100%;
-  padding: 0.875rem 1rem;
-  background: #00f2ea;
-  border: none;
-  border-radius: 10px;
-  color: #0a0f1c;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, rgba(0, 242, 234, 0.1), rgba(0, 242, 234, 0.05));
+  border: 1px solid rgba(0, 242, 234, 0.3);
+  border-radius: 12px;
+  color: #00f2ea;
   font-weight: 600;
-  font-size: 0.9375rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.9rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 242, 234, 0.2);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    background: #1affee;
-    box-shadow: 0 4px 16px rgba(0, 242, 234, 0.3);
+    background: rgba(0, 242, 234, 0.15);
+    border-color: #00f2ea;
+    box-shadow: 0 0 16px rgba(0, 242, 234, 0.15);
     transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 `;
 

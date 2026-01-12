@@ -978,23 +978,25 @@ const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  background: linear-gradient(135deg, #0a0f1c 0%, #050505 50%, #0a0f1c 100%);
+  background-color: #050505;
   overflow: hidden;
   overscroll-behavior-y: none;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: margin-left 0.3s ease, width 0.3s ease;
 
+  /* Tablet (768px - 1024px) */
   @media (max-width: 1024px) {
     margin-left: ${props => props.$sidebarOpen ? '280px' : '0'};
     width: ${props => props.$sidebarOpen ? 'calc(100% - 280px)' : '100%'};
   }
 
+  /* Mobile (320px - 768px) */
   @media (max-width: 768px) {
     margin-left: 0 !important;
     width: 100% !important;
     height: 100vh;
-    height: 100dvh;
+    height: 100dvh; /* Use dynamic viewport height for mobile */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1015,15 +1017,12 @@ const StyledChatBot = styled.div`
   touch-action: pan-y;
 
   .chat-header {
-    background: rgba(10, 15, 28, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 242, 234, 0.15);
-    padding: 1.25rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 242, 234, 0.2);
+    padding: 1rem;
     flex-shrink: 0;
     width: 100%;
     box-sizing: border-box;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   }
 
   .header-content {
@@ -1032,7 +1031,7 @@ const StyledChatBot = styled.div`
     align-items: center;
     width: 100%;
     min-width: 0;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   .mobile-menu-btn {
@@ -1053,20 +1052,17 @@ const StyledChatBot = styled.div`
   }
 
   .header-content h2 {
-    color: #ffffff;
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    color: #00f2ea;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     flex-shrink: 1;
     min-width: 0;
-    background: linear-gradient(135deg, #00f2ea 0%, #ffffff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .header-actions {
@@ -1078,50 +1074,41 @@ const StyledChatBot = styled.div`
   }
 
   .history-btn {
-    background: rgba(0, 242, 234, 0.08);
-    border: 1px solid rgba(0, 242, 234, 0.2);
+    background: transparent;
+    border: 1px solid rgba(0, 242, 234, 0.5);
     color: #00f2ea;
-    padding: 0.625rem 1.25rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border-radius: 8px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    transition: all 0.3s;
     white-space: nowrap;
-
+    
     &:hover {
-      background-color: rgba(0, 242, 234, 0.15);
-      border-color: rgba(0, 242, 234, 0.4);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 242, 234, 0.15);
-    }
-
-    &:active {
-      transform: translateY(0);
+      background-color: rgba(0, 242, 234, 0.2);
+      border-color: #00f2ea;
     }
   }
 
   .new-chat-btn-header {
-    background: #00f2ea;
+    background: linear-gradient(135deg, #00f2ea 0%, #a855f7 100%);
     border: none;
-    color: #0a0f1c;
-    padding: 0.625rem 1.25rem;
+    color: #0d0d0d;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 0.875rem;
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
     font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+    transition: all 0.3s;
     white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(0, 242, 234, 0.2);
-
+    
     &:hover {
-      background: #1affee;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(0, 242, 234, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 242, 234, 0.3);
     }
-
+    
     &:active {
       transform: translateY(0);
     }
@@ -1138,27 +1125,21 @@ const StyledChatBot = styled.div`
   }
 
   .logout-btn {
-    background: rgba(255, 75, 75, 0.08);
-    border: 1px solid rgba(255, 75, 75, 0.3);
-    color: #ff4b4b;
-    padding: 0.625rem 1.25rem;
+    background: transparent;
+    border: 1px solid #00f2ea;
+    color: #00f2ea;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border-radius: 8px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
   }
 
   .logout-btn:hover {
-    background-color: rgba(255, 75, 75, 0.15);
-    border-color: rgba(255, 75, 75, 0.5);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 75, 75, 0.15);
-  }
-
-  .logout-btn:active {
-    transform: translateY(0);
+    background-color: #00f2ea;
+    color: #0d0d0d;
   }
 
   .chat-messages {
@@ -1295,51 +1276,46 @@ const StyledChatBot = styled.div`
 
   .message-content {
     max-width: 70%;
-    padding: 1rem 1.25rem;
-    border-radius: 16px;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
     word-wrap: break-word;
-    line-height: 1.6;
+    line-height: 1.8;
     white-space: pre-line;
     position: relative;
     box-sizing: border-box;
-    font-size: 0.9375rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .message-content a {
     color: #00f2ea;
-    text-decoration: none;
+    text-decoration: underline;
     word-break: break-all;
-    border-bottom: 1px solid rgba(0, 242, 234, 0.3);
-    transition: all 0.2s ease;
   }
-
+  
   .message-content a:hover {
-    color: #1affee;
-    border-bottom-color: #00f2ea;
+    color: #a855f7;
   }
-
+  
   .message-content strong {
     color: #00f2ea;
-    font-weight: 600;
+    font-weight: 700;
   }
-
+  
   .message-content em {
-    color: #8dd3f0;
+    color: #a855f7;
     font-style: italic;
   }
 
   .message.user .message-content {
-    background: linear-gradient(135deg, rgba(0, 242, 234, 0.15) 0%, rgba(0, 242, 234, 0.08) 100%);
-    border: 1px solid rgba(0, 242, 234, 0.25);
-    color: #ffffff;
+    background-color: rgba(0, 242, 234, 0.2);
+    border: 1px solid rgba(0, 242, 234, 0.4);
+    color: #00f2ea;
     margin-left: auto;
   }
 
   .message.assistant .message-content {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #e8eaed;
+    background-color: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #e5e5e5;
     margin-right: auto;
   }
 
@@ -1429,37 +1405,32 @@ const StyledChatBot = styled.div`
 
   .chat-input-form {
     display: flex;
-    padding: 1.25rem 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(10, 15, 28, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    gap: 0.75rem;
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 242, 234, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
+    gap: 0.5rem;
     flex-shrink: 0;
     z-index: 100;
     position: relative;
     align-items: center;
-    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.2);
   }
 
   .chat-input-form input {
     flex: 1;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    padding: 0.875rem 1.125rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 0.9375rem;
+    background: transparent;
+    border: 1px solid rgba(0, 242, 234, 0.3);
+    color: #e5e5e5;
+    padding: 0.75rem;
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
     outline: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 12px;
+    transition: border-color 0.3s;
+    border-radius: 4px;
     min-width: 0;
   }
 
   .chat-input-form input:focus {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(0, 242, 234, 0.4);
-    box-shadow: 0 0 0 3px rgba(0, 242, 234, 0.1);
+    border-color: #00f2ea;
   }
 
   .chat-input-form input:disabled {
@@ -1467,24 +1438,21 @@ const StyledChatBot = styled.div`
     cursor: not-allowed;
   }
 
-  .chat-input-form input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
   .chat-input-form button[type="submit"] {
-    background: #00f2ea;
-    border: none;
-    color: #0a0f1c;
-    padding: 0.875rem 1.75rem;
+    background: transparent;
+    border: 2px solid #00f2ea;
+    color: #00f2ea;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 12px;
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
+    border-radius: 4px;
     flex-shrink: 0;
     white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(0, 242, 234, 0.2);
   }
 
   .voice-btn {
@@ -1520,18 +1488,13 @@ const StyledChatBot = styled.div`
     100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
   }
 
-  .chat-input-form button[type="submit"]:hover:not(:disabled) {
-    background-color: #1affee;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(0, 242, 234, 0.3);
-  }
-
-  .chat-input-form button[type="submit"]:active:not(:disabled) {
-    transform: translateY(0);
+  .chat-input-form button:hover:not(:disabled) {
+    background-color: #00f2ea;
+    color: #0d0d0d;
   }
 
   .chat-input-form button:disabled {
-    opacity: 0.4;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 
@@ -1561,44 +1524,42 @@ const StyledChatBot = styled.div`
   }
 
   .suggestions-bar {
-    padding: 1.25rem 1.5rem;
-    background: rgba(10, 15, 28, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 242, 234, 0.2);
+    border-bottom: 1px solid rgba(0, 242, 234, 0.2);
     flex-shrink: 0;
   }
 
   .suggestions-label {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.8125rem;
-    margin-bottom: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #e5e5e5;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
   }
 
   .suggestions-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.625rem;
+    gap: 0.5rem;
     align-items: flex-start;
   }
 
   .suggestion-btn {
-    background: rgba(0, 242, 234, 0.08);
-    border: 1px solid rgba(0, 242, 234, 0.2);
+    background: transparent;
+    border: 1px solid rgba(0, 242, 234, 0.4);
     color: #00f2ea;
-    padding: 0.625rem 1.125rem;
-    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
     cursor: pointer;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    transition: all 0.3s;
     white-space: nowrap;
-    min-height: 38px;
+    min-height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1606,10 +1567,10 @@ const StyledChatBot = styled.div`
   }
 
   .suggestion-btn:hover {
-    background-color: rgba(0, 242, 234, 0.15);
-    border-color: rgba(0, 242, 234, 0.4);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 242, 234, 0.15);
+    background-color: rgba(0, 242, 234, 0.2);
+    border-color: #00f2ea;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 242, 234, 0.3);
   }
 
   .suggestion-btn:active {
